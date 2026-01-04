@@ -1,0 +1,12 @@
+* file name: sample2.ine
+* LP
+H-representation
+begin
+    3    3    real
+0  1 -1
+0  0  1
+1 -1  0
+end
+minimize
+ 0  -3  -4
+
