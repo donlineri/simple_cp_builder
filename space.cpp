@@ -14,59 +14,35 @@
 #include FT_FREETYPE_H
 #include "shader_s.h"
 
-static const double axes_vertices[] = {
+static const float axis_vertices[] = {
 	//X-axis
-	-1.0, 0.0, 0.0, 0.5, 0.41, 0.33,
-	1.0, 0.0, 0.0, 0.5, 0.41, 0.33,
-	1.0, 0.0, 0.0, 0.5, 0.41, 0.33,
-	0.9, 0.2, 0.0, 0.5, 0.41, 0.33,
-	1.0, 0.0, 0.0, 0.5, 0.41, 0.33,
-	0.9, -0.2, 0.0, 0.5, 0.41, 0.33,
+	-1.0f, 0.0f, 0.0f, 0.5f, 0.41f, 0.33f,
+	1.0f, 0.0f, 0.0f, 0.5f, 0.41f, 0.33f,
+	1.0f, 0.0f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.9f, 0.2f, 0.0f, 0.5f, 0.41f, 0.33f,
+	1.0f, 0.0f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.9f, -0.2f, 0.0f, 0.5f, 0.41f, 0.33f,
 	//X-axis divisions
-	0.0, 0.1, 0.0, 0.5, 0.41, 0.33,
-	0.0, -0.1, 0.0, 0.5, 0.41, 0.33,
-	0.5, 0.1, 0.0, 0.5, 0.41, 0.33,
-	0.5, -0.1, 0.0, 0.5, 0.41, 0.33,
-	0.25, 0.1, 0.0, 0.5, 0.41, 0.33,
-	0.25, -0.1, 0.0, 0.5, 0.41, 0.33,
-	0.75, 0.1, 0.0, 0.5, 0.41, 0.33,
-	0.75, -0.1, 0.0, 0.5, 0.41, 0.33,
-	-0.5, 0.1, 0.0, 0.5, 0.41, 0.33,
-	-0.5, -0.1, 0.0, 0.5, 0.41, 0.33,
-	-0.25, 0.1, 0.0, 0.5, 0.41, 0.33,
-	-0.25, -0.1, 0.0, 0.5, 0.41, 0.33,
-	-0.75, 0.1, 0.0, 0.5, 0.41, 0.33,
-	-0.75, -0.1, 0.0, 0.5, 0.41, 0.33,
-	//Y-axis
-	0.0, -1.0, 0.0, 0.5, 0.41, 0.33,
-	0.0, 1.0, 0.0, 0.5, 0.41, 0.33,
-	0.0, 1.0, 0.0, 0.5, 0.41, 0.33,
-	-0.2, 0.9, 0.0, 0.5, 0.41, 0.33,
-	0.0, 1.0, 0.0, 0.5, 0.41, 0.33,
-	0.2, 0.9, 0.0, 0.5, 0.41, 0.33,
-	//Y-axis divisions
-	-0.1, 0.0, 0.0, 0.5, 0.41, 0.33,
-	0.1, 0.0, 0.0, 0.5, 0.41, 0.33,
-	-0.1, 0.5, 0.0, 0.5, 0.41, 0.33,
-	0.1, 0.5, 0.0, 0.5, 0.41, 0.33,
-	-0.1, 0.25, 0.0, 0.5, 0.41, 0.33,
-	0.1, 0.25, 0.0, 0.5, 0.41, 0.33,
-	-0.1, 0.75, 0.0, 0.5, 0.41, 0.33,
-	0.1, 0.75, 0.0, 0.5, 0.41, 0.33,
-	-0.1, -0.5, 0.0, 0.5, 0.41, 0.33,
-	0.1, -0.5, 0.0, 0.5, 0.41, 0.33,
-	-0.1, -0.25, 0.0, 0.5, 0.41, 0.33,
-	0.1, -0.25, 0.0, 0.5, 0.41, 0.33,
-	-0.1, -0.75, 0.0, 0.5, 0.41, 0.33,
-	0.1, -0.75, 0.0, 0.5, 0.41, 0.33,
+	0.0f, 0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.0f, -0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.5f, 0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.5f, -0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.25f, 0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.25f, -0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.75f, 0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	0.75f, -0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	-0.5f, 0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	-0.5f, -0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	-0.25f, 0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	-0.25f, -0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	-0.75f, 0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
+	-0.75f, -0.1f, 0.0f, 0.5f, 0.41f, 0.33f,
 };
 
 //static Camera cam(glm::vec3(0.0f, 0.0f, 1.0f));
 
 static float offset_x = 0.0f, offset_y = 0.0f, clip_x = 10.0f, clip_y = 10.0f;
 static float width_height_ratio = 1.0f;
-
-bool ctrl_active = false;
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -77,28 +53,19 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void processInput(GLFWwindow *window)
 {
-}
-
-static void key_callback(GLFWwindow *window, int key, int scancode, int action,
-                  int mods)
-{
-	if(key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS) &&
-     mods != GLFW_MOD_CONTROL)
-		offset_y += 0.1f;
-	if(key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS) &&
-     mods != GLFW_MOD_CONTROL)
-		offset_y -= 0.1f;
-	if(key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-		offset_x += 0.1f;
-	if(key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-		offset_x -= 0.1f;
-	if(key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS) &&
-     mods == GLFW_MOD_CONTROL) {
+	int key_up = glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS;
+	int key_down = glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS;
+	int is_zoom_inc =  key_up &&
+		glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS;
+	int is_zoom_dec = key_down &&
+		glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS;
+	if(is_zoom_inc) {
 		clip_y += 0.1f;
 		clip_x += 0.1f;
 	}
-	if(key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS) &&
-     mods == GLFW_MOD_CONTROL) {
+	else if(key_up)
+		offset_y += 0.1f;
+	if(is_zoom_dec) {
 		clip_y -= 0.1f;
 		clip_x -= 0.1f;
 		if(clip_y <= 0.1f) {
@@ -106,26 +73,12 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action,
 			clip_x = 0.1f;
 		}
 	}
-	/*
-	if(key == GLFW_KEY_UP && (action == GLFW_REPEAT or action == GLFW_PRESS) &&
-     mods == GLFW_MOD_CONTROL)
-		clip_y += 0.1f;
-	if(key == GLFW_KEY_DOWN && (action == GLFW_REPEAT or action == GLFW_PRESS) &&
-     mods == GLFW_MOD_CONTROL) {
-		clip_y -= 0.1f;
-		if(clip_y < 0.0f)
-			clip_y = 0.1f;
-	}
-	if(key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT or action == GLFW_PRESS) &&
-     mods == GLFW_MOD_CONTROL)
-		clip_x += 0.1f;
-	if(key == GLFW_KEY_LEFT && (action == GLFW_REPEAT or action == GLFW_PRESS) &&
-     mods == GLFW_MOD_CONTROL) {
-		clip_x -= 0.1f;
-		if(clip_x < 0.0f)
-			clip_x = 0.1f;
-	}
-	*/
+	else if(key_down)
+		offset_y -= 0.1f;
+	if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		offset_x += 0.1f;
+	if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+		offset_x -= 0.1f;
 	if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, 1);
 }
@@ -136,6 +89,7 @@ static void prepare_window(GLFWwindow **window_ptr)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
 
 	GLFWwindow* window = glfwCreateWindow(700, 700, "graph", NULL, NULL);
 	if(window == NULL) {
@@ -151,7 +105,6 @@ static void prepare_window(GLFWwindow **window_ptr)
 	}
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetKeyCallback(window, key_callback);
 
 	*window_ptr = window;
 }
@@ -225,14 +178,21 @@ static void set_matrix(Shader *shader, const char *locname, glm::mat4 *mat)
 	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(*mat));
 }
 
-void draw_x_axis(unsigned int axes_VAO, Shader *shader, float aclip_x,
-		float aclip_y)
+void draw_axis(unsigned int axes_VAO, Shader *shader, float aclip_x,
+		float aclip_y, int is_x)
 {
+	glm::mat4 e_mat = glm::mat4(1.0f);
 	glm::mat4 model;
 
-	model = glm::mat4(1.0f);
-	model = glm::scale(model, glm::vec3(1.0f*aclip_x, 0.1f*aclip_y, 1.0f));
-	model = glm::translate(model, glm::vec3(offset_x/aclip_x, 0.0f, 0.0f));
+	if(is_x) {
+		model = glm::scale(e_mat, glm::vec3(1.0f*aclip_x, 0.1f*aclip_y, 1.0f));
+		model = glm::translate(model, glm::vec3(offset_x/aclip_x, 0.0f, 0.0f));
+	}
+	else {
+		model = glm::scale(e_mat, glm::vec3(0.1f*aclip_x, 1.0f*aclip_y, 1.0f));
+		model = glm::translate(model, glm::vec3(0.0f, offset_y/aclip_y, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	}
 
 	shader->use();
 	set_matrix(shader, "model", &model);
@@ -240,34 +200,11 @@ void draw_x_axis(unsigned int axes_VAO, Shader *shader, float aclip_x,
 	glDrawArrays(GL_LINES, 0, 20);
 }
 
-void draw_y_axis(unsigned int axes_VAO, Shader *shader, float aclip_x,
-		float aclip_y)
-{
-	glm::mat4 model;
-
-	model = glm::mat4(1.0f);
-	model = glm::scale(model, glm::vec3(0.1f*aclip_x, 1.0f*aclip_y, 1.0f));
-	model = glm::translate(model, glm::vec3(0.0f, offset_y/aclip_y, 0.0f));
-
-	shader->use();
-	set_matrix(shader, "model", &model);
-
-	glDrawArrays(GL_LINES, 20, 20);
-}
-
-/*
-void set_view_mat(Shader *shader, float offset_x, float offset_y)
-{
-	glm::mat4 view;
-	view = glm::mat4(1.0f);
-	view = glm::translate(view, glm::vec3(-offset_x, -offset_y, -1.0f));
-	set_matrix(shader, "view", &view);
-}
-*/
-
 void draw_numbering(text_render_object *text_render_obj, float aclip_x,
 		float aclip_y)
 {
+	int i, count_vertices = sizeof(axis_vertices)/sizeof(float);
+	float magic, pos;
 	char buf[50];
 	glm::mat4 model;
 	model = glm::mat4(1.0f);
@@ -276,69 +213,29 @@ void draw_numbering(text_render_object *text_render_obj, float aclip_x,
 				0.0f, 0.0f));
 	text_render_obj->shader->use();
 	set_matrix(text_render_obj->shader, "model", &model);
-	//render_text(text_render_obj, "0", 0.025f*clip_x, -0.5f, 0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_x);
-	render_text(text_render_obj, buf,
-			-0.5*string_size(text_render_obj->characters, buf)*0.01f, -0.55,
-			0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_x+0.5f*aclip_x);
-	render_text(text_render_obj, buf,
-			5.0f-0.5*string_size(text_render_obj->characters, buf)*0.01f, -0.55,
-			0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_x+0.25f*aclip_x);
-	render_text(text_render_obj, buf,
-			2.5f-0.5*string_size(text_render_obj->characters, buf)*0.01f, -0.55,
-			0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_x+0.75f*aclip_x);
-	render_text(text_render_obj, buf,
-			7.5f-0.5*string_size(text_render_obj->characters, buf)*0.01f, -0.55,
-			0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_x-0.25f*aclip_x);
-	render_text(text_render_obj, buf,
-			-2.5f-0.5*string_size(text_render_obj->characters, buf)*0.01f, -0.55,
-			0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_x-0.5f*aclip_x);
-	render_text(text_render_obj, buf,
-			-5.0f-0.5*string_size(text_render_obj->characters, buf)*0.01f, -0.55,
-			0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_x-0.75f*aclip_x);
-	render_text(text_render_obj, buf,
-			-7.5f-0.5*string_size(text_render_obj->characters, buf)*0.01f, -0.55,
-			0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
+
+	magic = -0.5f*0.01f;
+	for(i = 6*6; i < count_vertices; i += 2*6) {
+		pos = axis_vertices[i];
+		snprintf(buf, 50, "%.2f", offset_x+pos*aclip_x);
+		render_text(text_render_obj, buf,
+				10.0f*pos+magic*string_size(text_render_obj->characters, buf), -0.55,
+				0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
+	}
 
 	model = glm::mat4(1.0f);
 	model = glm::scale(model, glm::vec3(0.1f*aclip_x, 0.1f*aclip_y, 1.0f));
 	model = glm::translate(model, glm::vec3(0.0f, offset_y/(0.1f*aclip_y),
 				0.0f));
 	set_matrix(text_render_obj->shader, "model", &model);
-	snprintf(buf, 50, "%.2f", offset_y-0.0f*aclip_y);
-	render_text(text_render_obj, buf, 0.35,
-			-0.5*text_render_obj->characters[48].size.y*0.01f, 0.01f,
-			glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_y+0.5f*aclip_y);
-	render_text(text_render_obj, buf, 0.35,
-			5.0f-0.5*text_render_obj->characters[48].size.y*0.01f, 0.01f,
-			glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_y+0.75f*aclip_y);
-	render_text(text_render_obj, buf, 0.35,
-			7.5f-0.5*text_render_obj->characters[48].size.y*0.01f, 0.01f,
-			glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_y+0.25f*aclip_y);
-	render_text(text_render_obj, buf, 0.35,
-			2.5f-0.5*text_render_obj->characters[48].size.y*0.01f, 0.01f,
-			glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_y-0.5f*aclip_y);
-	render_text(text_render_obj, buf, 0.35,
-			-5.0f-0.5*text_render_obj->characters[48].size.y*0.01f, 0.01f,
-			glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_y-0.75f*aclip_y);
-	render_text(text_render_obj, buf, 0.35,
-			-7.5f-0.5*text_render_obj->characters[48].size.y*0.01f, 0.01f,
-			glm::vec3(0.5f, 0.8f, 0.2f));
-	snprintf(buf, 50, "%.2f", offset_y-0.25f*aclip_y);
-	render_text(text_render_obj, buf, 0.35,
-			-2.5f-0.5*text_render_obj->characters[48].size.y*0.01f, 0.01f,
-			glm::vec3(0.5f, 0.8f, 0.2f));
+	magic = -0.5f*text_render_obj->characters[48].size.y*0.01f;
+	for(i = 6*6; i < count_vertices; i += 2*6) {
+		pos = axis_vertices[i];
+		snprintf(buf, 50, "%.2f", offset_y+pos*aclip_y);
+		render_text(text_render_obj, buf, 0.35,
+				10.0f*pos+magic,
+				0.01f, glm::vec3(0.5f, 0.8f, 0.2f));
+	}
 }
 
 void gen_characters(character **characters)
@@ -442,13 +339,13 @@ void prepare_axes(unsigned int *axes_VBO, unsigned int *axes_VAO)
 	glGenBuffers(1, axes_VBO);
 	glBindVertexArray(*axes_VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, *axes_VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(axes_vertices), axes_vertices,
+	glBufferData(GL_ARRAY_BUFFER, sizeof(axis_vertices), axis_vertices,
 			GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 6*sizeof(double),
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float),
 			(void *)0);
 	glEnableVertexAttribArray(0); //0 = Location in Vertex shader
-	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 6*sizeof(double),
-			(void *)(3*sizeof(double)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float),
+			(void *)(3*sizeof(float)));
 	glEnableVertexAttribArray(1); //1 = layout (Location) in Vertex shader
 	//no needed VBO bind to GL_ARRAY_BUFFER now
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -476,7 +373,7 @@ void draw_graph(space *plane,
 	printf("cp_count:%d\n", count_vertices);
 	while(!glfwWindowShouldClose(plane->window))
 	{
-		//processInput(window);
+		processInput(plane->window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		if(width_height_ratio < 1.0) {
@@ -498,12 +395,10 @@ void draw_graph(space *plane,
 		view = glm::mat4(1.0f);
 		view = glm::translate(view, glm::vec3(-offset_x, -offset_y, -1.0f));
 		set_matrix(plane->shader, "view", &view);
-		/* TODO: axes should be made separate objects with different VAO
-		 */ 
 		glBindVertexArray(plane->axes_VAO);
 		glLineWidth(2.0f);
-		draw_x_axis(plane->axes_VAO, plane->shader, aclip_x, aclip_y);
-		draw_y_axis(plane->axes_VAO, plane->shader, aclip_x, aclip_y);
+		draw_axis(plane->axes_VAO, plane->shader, aclip_x, aclip_y, 1);
+		draw_axis(plane->axes_VAO, plane->shader, aclip_x, aclip_y, 0);
 		glLineWidth(0.0f);
 		draw_something(VAO, count_vertices, plane->shader);
 		plane->text_render_obj->shader->use();

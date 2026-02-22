@@ -1,0 +1,35 @@
+TODO
+* BUG: don't delete temporary files with incorrect data
+* check incorrect number of inequalities (sample7.ine) or don't check, because cddlib doesn't check number
+* раскрашивать ось x и ось y и их нумерацию разными цветами для их различия
+* Научиться определять бесконечное множество, чтобы корректно рисовать в 3d, а также убрать лишнюю работу в 2d в некоторых случаях
+* logging clip, offset in file, проверить баг о исчезновении всего на сильном приближении, т.е. разрешить clip быть меньше константы (0.1f)
+* конечное множество, а должно быть бесконечно. Отрисовываемый объект на плоскости константен по вершинам, а должен быть изменяемым. Необходимо подумать насчет расширения взаимодействия между главным модулем и модулем space.
+* свой шейдер для объекта на плоскости (надо?)
+* правильная адаптируемость (ресайзинг) нумерации и осей
+* новый модуль (cddlib?)
+* решить для 3д
+* документация
+* мышь
+* fltk
+* добавить раскрашивание осей другим цветом при их перекрытии множеством
+* tmpfile or mkstemp for create file, windows port
+* new module camera
+
+E03 28.01.2026
+* array of axes can be used to draw numbering
+* axes should be made one object arrow who rotated with model matrix, not different object
+* BUG: only one key can be pressed
+
+E02 31.08.2025
+* view matrix is camera
+* баг: исчезновения всего на сильном приближении
+
+E01 29.08.2025
+* prepare_convex_polygon should separate on two function, because
+window should be after input, not before
+* delete stupid max_file_pos and do infinite file
+
+E00 05.08.2025
+* new module space
+* do DEBUG flag for unlink generating file

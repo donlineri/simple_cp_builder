@@ -59,29 +59,18 @@ void order_vertices(double **cp_vertices, double (**g)[1],
 		centroidX += g[i][1][0];
 		centroidY += g[i][2][0];
 	}
-	//printf("rowsize: %ld\n", rowsize);
-	//printf("centroidX = %lf\ncentroidY = %lf\n", centroidX, centroidY);
 	centroidX /= rowsize;
 	centroidY /= rowsize;
-	//printf("centroidX = %lf\ncentroidY = %lf\n", centroidX, centroidY);
 	for(i = 0; i < rowsize; i++) {
 		cp_number_vertices[i] = i;
 		cp_angle_vertices[i] = atan2(g[i][2][0] - centroidY, g[i][1][0] - centroidX);
 	}
-	/*
-	for(i = 0; i < rowsize; i++)
-		printf("vertex %d angle %lf \n", cp_number_vertices[i], cp_angle_vertices[i]);
-		*/
 	for(j = rowsize; j > 1; j--)
 		for(i = 1; i < j; i++)
 			if(cp_angle_vertices[i-1] > cp_angle_vertices[i]) {
 				swap_double(&cp_angle_vertices[i-1], &cp_angle_vertices[i]);
 				swap_int(&cp_number_vertices[i-1], &cp_number_vertices[i]);
 			}
-	/*
-	for(i = 0; i < rowsize; i++)
-		printf("vertex %d angle %lf \n", cp_number_vertices[i], cp_angle_vertices[i]);
-		*/
 	/*
 	int frontFaceMode;
 	//glFrontFace(GL_CW);
@@ -291,14 +280,6 @@ int main()
 	unsigned int cp_VBO, cp_VAO, cp_count_vertices;
 	double *cp_vertices;
 	get_cp_vertices(&cp_vertices, &cp_count_vertices);
-	/*
-	unsigned int i;
-	for(i = 0; i < *cp_count_vertices; i++) {
-		printf("%lf;%lf;%lf;%lf;%lf;%lf\n", cp_vertices[i*6], cp_vertices[i*6+1],
-				cp_vertices[i*6+2], cp_vertices[i*6+3], cp_vertices[i*6+4],
-				cp_vertices[i*6+5]);
-	}
-	*/
 	prepare_plane(&plane);
 	prepare_convex_polygon(&cp_VBO, &cp_VAO, cp_count_vertices, cp_vertices);
 	draw_graph(plane, draw_cp, cp_VAO, cp_count_vertices);
